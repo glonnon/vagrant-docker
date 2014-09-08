@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+host=${1:-http://www.google.com}
+
+echo "waiting for $host"
+
+while ! curl -sL -m 10 $host -o /dev/null
+do 
+   echo -n .
+   sleep 1
+done
+
+echo 'ok'
