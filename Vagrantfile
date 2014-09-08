@@ -11,6 +11,15 @@ sys_env = {
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  config.vm.define "etcd" do |etcd|
+    etcd.vm.hostname = "etcd"
+    
+    etcd.vm.provider "docker" do |d|
+      d.image = "coreos/etcd:latest"
+      d.name = "etcd"
+    end
+  end
+
   config.vm.define "mysql" do |mysql|
     mysql.vm.hostname = "mysql"
     
@@ -44,11 +53,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     webapp.vm.provider "docker" do |d|
       d.build_dir = "webapp"
-      d.name = "webapp"
+    #  d.name = "webapp"
       env['foo'] = "bar"
       d.env = env
       d.link "rabbitmq:rabbitmq"
       d.link "mysql:mysql"
+      d.link "etcd:etcd"
     end
   end
 
