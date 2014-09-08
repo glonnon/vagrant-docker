@@ -5,9 +5,9 @@ My playground for vagrant docker stuff
 
 The Vagrantfile brings up the following containers...
 
+* etcd 
 * rabbitmq
 * mysql
-* etcd (future)
 * webapp
 
 There are tcp-wait and http-wait scripts to wait for sevices to be up before continuing.
